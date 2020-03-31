@@ -44,6 +44,7 @@ const typeDefs = `
     contacts : [ContactInput]
   }
 
+
   input ContactInput {
     firstName : String
     lastName : String
@@ -51,6 +52,8 @@ const typeDefs = `
 
   type Mutation {
     createFriend(input: FriendInput) : Friend
+    updateFriend(input: FriendInput) : Friend
+    deleteFriend(id: ID!) : Friend
   }
 `;
 

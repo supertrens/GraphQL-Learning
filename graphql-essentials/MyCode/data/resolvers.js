@@ -3,9 +3,8 @@ import { Friends } from "./model";
 // resolver map
 export const resolvers = {
   Query: {
-    getFriend: async id => {
+    getFriend: async (root, { id }) => {
       try {
-        console.log("Here", id);
         return await Friends.findOne({ _id: id });
       } catch (err) {
         console.log(err);
@@ -29,6 +28,23 @@ export const resolvers = {
 
       const savedData = await newFriend.save();
       return savedData;
+    },
+
+    updateFriend: async (root, { input }) => {
+      try {
+        return await Friends.findOneAndUpdate({ _id: input.id }, input, {
+          new: true
+        });
+      } catch (error) {
+        console.log(err);
+      }
+    },
+    deleteFriend: async (root, { id }) => {
+      try {
+        return await Friends.findOneAndDelete({ _id: id });
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 };
